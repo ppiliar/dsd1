@@ -14,23 +14,15 @@
 //mysql_connect("localhost","root","") or die ("conect error");
 //mysql_select_db ("zaklad") or die ("nepodarilo sa otvorit databazu");
 
-$con=mysqli_connect($config->host,$config->username,$config->password,$config->database) or die ("conect error");
-
-$edit = $_POST["edit"];
+$id = $_POST["id"];
+$node_id = $_POST["nodeID"];
 // z DB z tabulky osoba vyberieme meno,priezvisko,titul,rc
-$sql = "select id,meno,priezvisko,titul,rc from osoba WHERE rc='".$edit."' ";
+$sql = "SELECT id,meno,priezvisko,titul,rc FROM osoba WHERE id='$id' AND nodeID='$node_id';";
 
-function console_log( $data ){
-  echo '<script>';
-  echo 'console.log('. json_encode( $data ) .')';
-  echo '</script>';
-}
-
-$result = mysqli_query($con, $sql) or die ("chybny dotaz");
+$result = $db->select($sql);
+$row = $result[0];
 //nac񘑮ie hodn𴠤o pola
-$row = mysqli_fetch_array($result);
 
-$id = $row['id'];
 $meno = utf8_encode($row['meno']);
 $priezvisko = utf8_encode($row['priezvisko']);
 $titul = utf8_encode($row['titul']);
@@ -48,9 +40,11 @@ $rc = $row['rc'];
   <br>
   rodné číslo:<br>
   <input type='text' name='rc' value='$rc'>
-  <br>
+  <br>  
+  <input type='hidden' id='id' name='id' value=".$id.">
+  <input type='hidden' id='nodeID' name='nodeID' value=".$node_id.">
   
-  <button type='submit' name='edit' value='$id'>Ulozit</button>
+  <button type='submit'>Ulozit</button>
   
 </form>";
 ?>

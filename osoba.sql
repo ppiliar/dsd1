@@ -33,21 +33,22 @@ CREATE TABLE IF NOT EXISTS `osoba` (
   `rc` bigint(12) default NULL,
   `nickname` varchar(20) NOT NULL,
   `heslo` varchar(20) NOT NULL,
-  PRIMARY KEY  (`id`)
+  `nodeID` int(4),
+  PRIMARY KEY  (`id`, `nodeID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Sťahujem dáta pre tabuľku `osoba`
 --
 
-INSERT INTO `osoba` (`id`, `meno`, `priezvisko`, `titul`, `rc`, `nickname`, `heslo`) VALUES
-(1, 'Ján', 'Zeller', 'bc.', 8512113647, 'zell', 'zell'),
-(2, 'Ivan', 'Kaleráb', '', 7905263254, 'kale', 'kale'),
-(3, 'Emil', 'Kapusta', 'Ing.', 8004153268, 'kapu', 'kapu'),
-(4, 'Jana', 'Kapustová', 'Mgr.', 8561125421, 'jaka', 'jaka'),
-(5, 'Natália', 'Mrkvová', 'Ing.', 8706292365, 'namr', 'namr'),
-(6, 'Ivan', 'Cibula', 'PhDr.', 7606063256, 'cibu', 'cibu'),
-(7, 'Ján', 'Cibula', 'Mgr.', 7805232547, 'jaci', 'jaci'),
-(8, 'Olivia', 'Cesnaková', '', 8962113584, 'olce', 'olce'),
-(9, 'Peter', 'Karfiol', 'PhDr.', 7402056523, 'karfi', 'karfi'),
-(10, 'Ivan ', 'Ivanka', 'MVDr.', 7251652514, 'ivan', 'ivan');
+INSERT INTO `osoba` (`id`, `meno`, `priezvisko`, `titul`, `rc`, `nickname`, `heslo`, `nodeID`) VALUES
+(1, 'Ján', 'Zeller', 'bc.', 8512113647, 'zell', 'zell',1),
+(2, 'Ivan', 'Kaleráb', '', 7905263254, 'kale', 'kale',1),
+(3, 'Emil', 'Kapusta', 'Ing.', 8004153268, 'kapu', 'kapu',1),
+(4, 'Jana', 'Kapustová', 'Mgr.', 8561125421, 'jaka', 'jaka',1),
+(5, 'Natália', 'Mrkvová', 'Ing.', 8706292365, 'namr', 'namr',1),
+(6, 'Ivan', 'Cibula', 'PhDr.', 7606063256, 'cibu', 'cibu',1),
+(7, 'Ján', 'Cibula', 'Mgr.', 7805232547, 'jaci', 'jaci',1),
+(8, 'Olivia', 'Cesnaková', '', 8962113584, 'olce', 'olce',1),
+(9, 'Peter', 'Karfiol', 'PhDr.', 7402056523, 'karfi', 'karfi',1),
+(10, 'Ivan ', 'Ivanka', 'MVDr.', 7251652514, 'ivan', 'ivan',1);

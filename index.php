@@ -26,22 +26,32 @@
     	&nbsp;</p>
 <DIV CLASS =dolezite>
     <?php
-   $config = include("config.php");
+   function console_log($output, $with_script_tags = true) {
+      $js_code = 'console.log(' . json_encode($output, JSON_HEX_TAG) . 
+  ');';
+      if ($with_script_tags) {
+          $js_code = '<script>' . $js_code . '</script>';
+      }
+      echo $js_code;
+  }
+  include("./logix/db.php");
+  $db = new Database();
+  $dbManager = include("./logix/dbmng.php");
 $m=  @($_GET["menu"]);
-if (($m!=1) and ($m!=2) and ($m!=3) and ($m!=4) and ($m!=5) and ($m!=6) and ($m!=7) and ($m!=8) and ($m!=9) and ($m!=10)) $m=1;
+if (($m < 1) || ($m > 11)) $m=1;
 if (! isset($m)) $m=1;
 switch ($m){
-	        case 1:
-	          include ("prihlasenie.php");
-	        	break;
-	        case 2:
-	        	include ("registracia.php");
-	        	break;
-	        case 3:
-	        	include ("vypis-DB.php");
-	        	break;
-			case 4:
-	        	include ("hladaj-podla-mena.php");
+	case 1:
+	      include ("prihlasenie.php");
+	    	break;
+	case 2:
+	     	include ("registracia.php");
+	     	break;
+	case 3:
+	     	include ("vypis-DB.php");
+	     	break;
+	case 4:
+	     	include ("hladaj-podla-mena.php");
             break;
       case 5:
             include ("vypis-podla-mena.php");
@@ -60,11 +70,14 @@ switch ($m){
             break;   
       case 10:
             include ("print-search.php");
-            break;                             
+            break;                                
+      case 11:
+            include("welcome2.php");
+            break;
       default:
-		        include ("prihlasenie.php");
-	        	break;
-	                    }
+		include ("prihlasenie.php");
+	      break;
+	}
 
 ?>
 </DIV>

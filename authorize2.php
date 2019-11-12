@@ -1,4 +1,5 @@
 ﻿<?php
+include("./logix/db.php");
 // hned na zaciatku pouzijeme prikaz na pokracovanie v session
 session_start();
 
@@ -6,28 +7,23 @@ session_start();
 $username = $_REQUEST['username'];
 $password = $_REQUEST['password'];
 //otvoríme DB
-$con=mysqli_connect($config->host,$config->username,$config->password,$config->database) or die ("conect error");
-//mysql_select_db ("zaklad") or die ("nepodarilo sa otvorit databazu");
+$db = new Database();
+$db->connect();
 
 //vyberieme z DB nickname a heslo na porovnanie so zadanými hodnotami 
-  $sql = "select nickname,heslo from osoba where nickname=\"$username\"";
+$sql = "SELECT nickname,heslo FROM osoba WHERE nickname='$username'";
+$result = $db->select($sql);
 
-$result = mysqli_query($con,$sql) or die ("chybny dotaz");
-while($row = mysqli_fetch_array($result,MYSQLI_ASSOC))
-		{ 
-			$_SESSION['username'] = $row['nickname'];
-			$_SESSION['passwd'] = $row['heslo'];
-		
-//porovnáme zadané heslo s heslom v DB			
-if( $password == $_SESSION['passwd'] ) {
-	
-header("location: welcome2.php");}
-	
+foreach($result as &$row)
+{ 
+	$_SESSION['username'] = $row['nickname'];
+	$_SESSION['passwd'] = $row['heslo'];
 
-else {
-echo "nemáte oprávnenie";
-}}
-//presmerujeme pouzivatela na uvitaciu stranku welcome2.php
-
+	//porovnáme zadané heslo s heslom v DB			
+	if( $password == $_SESSION['passwd'] ) {
+		header("location: index.php?menu=11");
+	} else {
+		echo "nemáte oprávnenie";
+	}
+}
 ?>
-
