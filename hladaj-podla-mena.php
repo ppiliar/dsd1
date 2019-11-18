@@ -1,8 +1,6 @@
 <?php
 // hned na zaciatku pouzijeme prikaz na spustenie session
 session_start();
-$meno = $_REQUEST['meno'];
-$priezvisko = $_REQUEST['priezvisko'];
 //zobrazime pouzivatelovi prihlasovaci formular
 echo '<br /><br /><br /><center>';
 echo '<form method = "POST" action = "index.php?menu=5">';

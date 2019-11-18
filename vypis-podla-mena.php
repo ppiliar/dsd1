@@ -7,20 +7,17 @@ $priezvisko = $_POST['priezvisko'];
 
 // hned na zaciatku pouzijeme prikaz na pokracovanie v session
 //session_start();
-//mysql_connect("localhost","root","") or die ("conect error");
-//mysql_select_db ("zaklad") or die ("nepodarilo sa otvorit databazu");
-$con=mysqli_connect($config->host,$config->username,$config->password,$config->database)  or die ("conect error");
-// z DB z tabulky osoba vyberieme meno,priezvisko,titul,rc
+
 $sql = "select meno,priezvisko,titul, rc from osoba WHERE meno LIKE '$meno%' AND priezvisko LIKE '$priezvisko%' ";
 
-$result = mysqli_query($con,$sql) or die ("chybny dotaz");
+$result = $db->select($sql);
+
 //nac�tanie hodn�t do pola
-while($row = mysqli_fetch_array($result,MYSQLI_ASSOC))
-		{ 
-			$meno = $row['meno'];
-			$priezvisko = $row['priezvisko'];
-			$titul = $row['titul'];
-      $rc = $row['rc'];
+foreach($result as &$row){
+		$meno = $row['meno'];
+		$priezvisko = $row['priezvisko'];
+		$titul = $row['titul'];
+    $rc = $row['rc'];
 
 //v�pis hodn�t
 echo "<tr>
